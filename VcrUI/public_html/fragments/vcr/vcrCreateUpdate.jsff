@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top"/>
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+      <af:panelHeader text="Visiting Card Request" id="ph1">
+        <f:facet name="toolbar">
+          <af:toolbar id="t1">
+            <af:group id="g1">
+              <af:button text="Back to Query" id="b1" action="backQuery" immediate="true"/>
+              <af:button text="Save Record" id="b2" action="#{createUpdateBean.b2_action}"/>
+            </af:group>
+          </af:toolbar>
+        </f:facet>
+        <af:panelGroupLayout id="pgl1" layout="vertical">
+          <af:panelLabelAndMessage label="#{bindings.VcrDocNo.hints.label}" id="plam1" inlineStyle="font-weight:bolder;"
+                                   labelStyle="font-weight:bolder;">
+            <af:outputText value="#{bindings.VcrDocNo.inputValue}" shortDesc="#{bindings.VcrDocNo.hints.tooltip}"
+                           id="ot1"/>
+          </af:panelLabelAndMessage>
+          <af:panelFormLayout id="pfl1">
+            <af:inputListOfValues id="branchName1Id" popupTitle="Search and Select: #{bindings.BranchName1.hints.label}"
+                                  value="#{bindings.BranchName1.inputValue}" label="#{bindings.BranchName1.hints.label}"
+                                  model="#{bindings.BranchName1.listOfValuesModel}"
+                                  required="#{bindings.BranchName1.hints.mandatory}"
+                                  columns="#{bindings.BranchName1.hints.displayWidth}"
+                                  shortDesc="#{bindings.BranchName1.hints.tooltip}"
+                                  disabled="#{bindings.DssVisitingCardReqView1.estimatedRowCount > 0}"
+                                  partialTriggers="pc1:b3">
+              <f:validator binding="#{bindings.BranchName1.validator}"/>
+            </af:inputListOfValues>
+            <af:inputText value="#{bindings.Address.inputValue}" label="#{bindings.Address.hints.label}"
+                          required="#{bindings.Address.hints.mandatory}"
+                          columns="#{bindings.Address.hints.displayWidth}"
+                          maximumLength="#{bindings.Address.hints.precision}"
+                          shortDesc="#{bindings.Address.hints.tooltip}" id="it7" rows="3"
+                          disabled="#{bindings.DssVisitingCardReqView1.estimatedRowCount > 0}" partialTriggers="pc1:b3">
+              <f:validator binding="#{bindings.Address.validator}"/>
+            </af:inputText>
+          </af:panelFormLayout>
+          <af:separator id="s2"/>
+          <af:separator id="s1"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t3">
+                <af:group id="g2">
+                  <af:button text="Add Agent" id="b3" actionListener="#{bindings.CreateInsert.execute}"/>
+                </af:group>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.DssVisitingCardReqView1.collectionModel}" var="row"
+                      rows="#{bindings.DssVisitingCardReqView1.rangeSize}"
+                      emptyText="#{bindings.DssVisitingCardReqView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.DssVisitingCardReqView1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.DssVisitingCardReqView1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.DssVisitingCardReqView1.rangeSize}" id="t2"
+                      partialTriggers="::b3 l1">
+              <af:column headerText="#{bindings.DssVisitingCardReqView1.hints.AgentCode.label}" id="c1" width="180">
+                <af:inputListOfValues id="agentCodeId"
+                                      popupTitle="Search and Select: #{bindings.DssVisitingCardReqView1.hints.AgentCode.label}"
+                                      value="#{row.bindings.AgentCode.inputValue}"
+                                      model="#{row.bindings.AgentCode.listOfValuesModel}"
+                                      required="#{bindings.DssVisitingCardReqView1.hints.AgentCode.mandatory}"
+                                      columns="#{bindings.DssVisitingCardReqView1.hints.AgentCode.displayWidth}"
+                                      shortDesc="#{bindings.DssVisitingCardReqView1.hints.AgentCode.tooltip}"
+                                      launchPopupListener="#{createUpdateBean.agentNoLaunchPopupEvent}">
+                  <f:validator binding="#{row.bindings.AgentCode.validator}"/>
+                </af:inputListOfValues>
+              </af:column>
+              <af:column headerText="#{bindings.DssVisitingCardReqView1.hints.AgentName.label}" id="c2" width="150">
+                <af:inputText value="#{row.bindings.AgentName.inputValue}"
+                              label="#{bindings.DssVisitingCardReqView1.hints.AgentName.label}"
+                              required="#{bindings.DssVisitingCardReqView1.hints.AgentName.mandatory}"
+                              columns="#{bindings.DssVisitingCardReqView1.hints.AgentName.displayWidth}"
+                              maximumLength="#{bindings.DssVisitingCardReqView1.hints.AgentName.precision}"
+                              shortDesc="#{bindings.DssVisitingCardReqView1.hints.AgentName.tooltip}" id="it2"
+                              disabled="true" partialTriggers="agentCodeId">
+                  <f:validator binding="#{row.bindings.AgentName.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="#{bindings.DssVisitingCardReqView1.hints.Designation.label}" id="c3" width="150">
+                <af:inputText value="#{row.bindings.Designation.inputValue}"
+                              label="#{bindings.DssVisitingCardReqView1.hints.Designation.label}"
+                              required="#{bindings.DssVisitingCardReqView1.hints.Designation.mandatory}"
+                              columns="#{bindings.DssVisitingCardReqView1.hints.Designation.displayWidth}"
+                              maximumLength="#{bindings.DssVisitingCardReqView1.hints.Designation.precision}"
+                              shortDesc="#{bindings.DssVisitingCardReqView1.hints.Designation.tooltip}" id="it3"
+                              disabled="true" partialTriggers="agentCodeId">
+                  <f:validator binding="#{row.bindings.Designation.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerCode.label}" id="c5"
+                         width="130">
+                <af:inputText value="#{row.bindings.ReportingManagerCode.inputValue}"
+                              label="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerCode.label}"
+                              required="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerCode.mandatory}"
+                              columns="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerCode.displayWidth}"
+                              maximumLength="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerCode.precision}"
+                              shortDesc="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerCode.tooltip}"
+                              id="it5" disabled="true" partialTriggers="agentCodeId">
+                  <f:validator binding="#{row.bindings.ReportingManagerCode.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerName.label}" id="c6"
+                         width="130">
+                <af:inputText value="#{row.bindings.ReportingManagerName.inputValue}"
+                              label="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerName.label}"
+                              required="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerName.mandatory}"
+                              columns="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerName.displayWidth}"
+                              maximumLength="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerName.precision}"
+                              shortDesc="#{bindings.DssVisitingCardReqView1.hints.ReportingManagerName.tooltip}"
+                              id="it6" disabled="true" partialTriggers="agentCodeId">
+                  <f:validator binding="#{row.bindings.ReportingManagerName.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="#{bindings.DssVisitingCardReqView1.hints.MobileNo.label}" id="c7" width="130">
+                <af:inputText value="#{row.bindings.MobileNo.inputValue}"
+                              label="#{bindings.DssVisitingCardReqView1.hints.MobileNo.label}"
+                              required="#{bindings.DssVisitingCardReqView1.hints.MobileNo.mandatory}"
+                              columns="#{bindings.DssVisitingCardReqView1.hints.MobileNo.displayWidth}"
+                              maximumLength="#{bindings.DssVisitingCardReqView1.hints.MobileNo.precision}"
+                              shortDesc="#{bindings.DssVisitingCardReqView1.hints.MobileNo.tooltip}" id="it1"
+                              disabled="true" partialTriggers="agentCodeId">
+                  <f:validator binding="#{row.bindings.MobileNo.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="#{bindings.DssVisitingCardReqView1.hints.AgentMobileNo.label}" id="c10"
+                         width="130">
+                <af:inputText value="#{row.bindings.AgentMobileNo.inputValue}"
+                              label="#{bindings.DssVisitingCardReqView1.hints.AgentMobileNo.label}"
+                              required="#{bindings.DssVisitingCardReqView1.hints.AgentMobileNo.mandatory}"
+                              columns="#{bindings.DssVisitingCardReqView1.hints.AgentMobileNo.displayWidth}"
+                              maximumLength="#{bindings.DssVisitingCardReqView1.hints.AgentMobileNo.precision}"
+                              shortDesc="#{bindings.DssVisitingCardReqView1.hints.AgentMobileNo.tooltip}" id="it9">
+                  <f:validator binding="#{row.bindings.AgentMobileNo.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="#{bindings.DssVisitingCardReqView1.hints.Qualification.label}" id="c4" width="110">
+                <af:inputText value="#{row.bindings.Qualification.inputValue}"
+                              label="#{bindings.DssVisitingCardReqView1.hints.Qualification.label}"
+                              required="#{bindings.DssVisitingCardReqView1.hints.Qualification.mandatory}"
+                              columns="#{bindings.DssVisitingCardReqView1.hints.Qualification.displayWidth}"
+                              maximumLength="#{bindings.DssVisitingCardReqView1.hints.Qualification.precision}"
+                              shortDesc="#{bindings.DssVisitingCardReqView1.hints.Qualification.tooltip}" id="it4">
+                  <f:validator binding="#{row.bindings.Qualification.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="#{bindings.DssVisitingCardReqView1.hints.OfficialEmailAdd.label}" id="c8"
+                         width="120">
+                <af:inputText value="#{row.bindings.OfficialEmailAdd.inputValue}"
+                              label="#{bindings.DssVisitingCardReqView1.hints.OfficialEmailAdd.label}"
+                              required="#{bindings.DssVisitingCardReqView1.hints.OfficialEmailAdd.mandatory}"
+                              columns="#{bindings.DssVisitingCardReqView1.hints.OfficialEmailAdd.displayWidth}"
+                              maximumLength="#{bindings.DssVisitingCardReqView1.hints.OfficialEmailAdd.precision}"
+                              shortDesc="#{bindings.DssVisitingCardReqView1.hints.OfficialEmailAdd.tooltip}" id="it8">
+                  <f:validator binding="#{row.bindings.OfficialEmailAdd.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column id="c9" align="center" headerText="Delete">
+                <af:link id="l1" icon="/images/deleteicon_enabled.gif" actionListener="#{bindings.Delete.execute}"
+                         immediate="true"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelGroupLayout>
+      </af:panelHeader>
+    </f:facet>
+  </af:panelStretchLayout>
+</ui:composition>

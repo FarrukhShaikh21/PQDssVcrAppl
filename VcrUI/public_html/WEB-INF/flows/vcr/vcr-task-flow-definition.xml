@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="vcr-task-flow-definition">
+    <default-activity>vcrSearchUser</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>vcrDetailClass</managed-bean-name>
+      <managed-bean-class>pqt.dss.vcr.view.vcrDetailClass</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__9">
+      <managed-bean-name>createUpdateBean</managed-bean-name>
+      <managed-bean-class>pqt.dss.vcr.view.createUpdateBean</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Rollback">
+      <method>#{bindings.Rollback.execute}</method>
+      <outcome>
+        <fixed-outcome>Rollback</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="vcrQuery">
+      <page>/fragments/vcr/vcrQuery.jsff</page>
+    </view>
+    <view id="vcrCreateUpdate">
+      <page>/fragments/vcr/vcrCreateUpdate.jsff</page>
+    </view>
+    <view id="vcrDetail">
+      <page>/fragments/vcr/vcrDetail.jsff</page>
+    </view>
+    <method-call id="Delete">
+      <method>#{bindings.Delete.execute}</method>
+      <outcome>
+        <fixed-outcome>Delete</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="DeleteCommit">
+      <method>#{bindings.DeleteCommit.execute}</method>
+      <outcome>
+        <fixed-outcome>DeleteCommit</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="vcrSearchUser">
+      <method>#{bindings.vcrSearchUser.execute}</method>
+      <outcome>
+        <fixed-outcome>vcrSearchUser</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__21">
+      <from-activity-id>vcrQuery</from-activity-id>
+      <control-flow-case id="__22">
+        <from-outcome>goCreate</from-outcome>
+        <to-activity-id>CreateInsert</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__25">
+        <from-outcome>goUpdate</from-outcome>
+        <to-activity-id>vcrCreateUpdate</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__33">
+        <from-outcome>goDetail</from-outcome>
+        <to-activity-id>vcrDetail</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2">
+        <from-outcome>goDelete</from-outcome>
+        <to-activity-id>Delete</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id>CreateInsert</from-activity-id>
+      <control-flow-case id="__24">
+        <from-outcome>CreateInsert</from-outcome>
+        <to-activity-id>vcrCreateUpdate</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__26">
+      <from-activity-id>vcrCreateUpdate</from-activity-id>
+      <control-flow-case id="__27">
+        <from-outcome>backQuery</from-outcome>
+        <to-activity-id>Rollback</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__28">
+      <from-activity-id>Rollback</from-activity-id>
+      <control-flow-case id="__29">
+        <from-outcome>Rollback</from-outcome>
+        <to-activity-id>vcrQuery</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__34">
+      <from-activity-id>vcrDetail</from-activity-id>
+      <control-flow-case id="__35">
+        <from-outcome>backQuery</from-outcome>
+        <to-activity-id>Rollback</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>Delete</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>Delete</from-outcome>
+        <to-activity-id>DeleteCommit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>DeleteCommit</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>DeleteCommit</from-outcome>
+        <to-activity-id>vcrQuery</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>vcrSearchUser</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>vcrSearchUser</from-outcome>
+        <to-activity-id>vcrQuery</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

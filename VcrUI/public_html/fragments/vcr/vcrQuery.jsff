@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout layout="vertical" id="pgl1">
+    <af:panelHeader text="Search Page" id="ph1">
+      <af:query id="qryId1" headerText="Search" disclosed="true"
+                value="#{bindings.DssVisitingCardReqHdrViewCriteriaQuery.queryDescriptor}"
+                model="#{bindings.DssVisitingCardReqHdrViewCriteriaQuery.queryModel}"
+                queryListener="#{bindings.DssVisitingCardReqHdrViewCriteriaQuery.processQuery}"
+                queryOperationListener="#{bindings.DssVisitingCardReqHdrViewCriteriaQuery.processQueryOperation}"
+                resultComponentId="::pc1:resId1" saveQueryMode="hidden" modeChangeVisible="false"/>
+    </af:panelHeader>
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth" featuresOff="detach viewMenu">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t1">
+          <af:group id="g1">
+            <af:button text="Create New" id="b1" action="goCreate"/>
+          </af:group>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar"/>
+      <af:table value="#{bindings.DssVisitingCardReqHdrView1.collectionModel}" var="row"
+                rows="#{bindings.DssVisitingCardReqHdrView1.rangeSize}"
+                emptyText="#{bindings.DssVisitingCardReqHdrView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0"
+                selectedRowKeys="#{bindings.DssVisitingCardReqHdrView1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.DssVisitingCardReqHdrView1.collectionModel.makeCurrent}"
+                rowSelection="single" fetchSize="#{bindings.DssVisitingCardReqHdrView1.rangeSize}" id="resId1">
+        <af:column headerText="#{bindings.DssVisitingCardReqHdrView1.hints.VcrHdrIdPk.label}" id="c6" rendered="false">
+          <af:inputText value="#{row.bindings.VcrHdrIdPk.inputValue}"
+                        label="#{bindings.DssVisitingCardReqHdrView1.hints.VcrHdrIdPk.label}"
+                        required="#{bindings.DssVisitingCardReqHdrView1.hints.VcrHdrIdPk.mandatory}"
+                        columns="#{bindings.DssVisitingCardReqHdrView1.hints.VcrHdrIdPk.displayWidth}"
+                        maximumLength="#{bindings.DssVisitingCardReqHdrView1.hints.VcrHdrIdPk.precision}"
+                        shortDesc="#{bindings.DssVisitingCardReqHdrView1.hints.VcrHdrIdPk.tooltip}" id="it1">
+            <f:validator binding="#{row.bindings.VcrHdrIdPk.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.DssVisitingCardReqHdrView1.hints.VcrHdrIdPk.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.DssVisitingCardReqHdrView1.hints.VcrDocNo.label}" id="c4" width="200"
+                   align="center">
+          <af:outputText value="#{row.VcrDocNo}"
+                         shortDesc="#{bindings.DssVisitingCardReqHdrView1.hints.VcrDocNo.tooltip}" id="ot6"/>
+        </af:column>
+        <af:column headerText="#{bindings.DssVisitingCardReqHdrView1.hints.BranchName.label}" id="resId1c1" width="100"
+                   align="center">
+          <af:outputText value="#{row.BranchName}"
+                         shortDesc="#{bindings.DssVisitingCardReqHdrView1.hints.BranchName.tooltip}" id="ot1"/>
+        </af:column>
+        <af:column headerText="#{bindings.DssVisitingCardReqHdrView1.hints.BranchCode.label}" id="resId1c2" width="138"
+                   align="center">
+          <af:outputText value="#{row.BranchCode}"
+                         shortDesc="#{bindings.DssVisitingCardReqHdrView1.hints.BranchCode.tooltip}" id="ot2"/>
+        </af:column>
+        <af:column headerText="#{bindings.DssVisitingCardReqHdrView1.hints.Address.label}" id="resId1c3" width="117"
+                   align="center">
+          <af:outputText value="#{row.Address}" shortDesc="#{bindings.DssVisitingCardReqHdrView1.hints.Address.tooltip}"
+                         id="ot3"/>
+        </af:column>
+        <af:column headerText="#{bindings.DssVisitingCardReqHdrView1.hints.WorkflowStatus.label}" id="c7"
+                   align="center">
+          <af:outputText value="#{row.WorkflowStatus}"
+                         shortDesc="#{bindings.DssVisitingCardReqHdrView1.hints.WorkflowStatus.tooltip}" id="ot4"/>
+        </af:column>
+        <af:column id="c1" align="center" headerText="Detail" width="50">
+          <af:link id="l1" icon="/images/detailsicon_enabled.gif" action="goDetail"/>
+        </af:column>
+        <af:column id="c2" align="center" headerText="Update" width="50">
+          <af:link id="l2" icon="/images/updateicon_enabled.gif" action="goUpdate"
+                   disabled="#{row.WorkflowStatus eq 'APPROVED' or row.WorkflowStatus eq 'INPROCESS'}"/>
+        </af:column>
+        <af:column id="c3" align="center" headerText="Delete" width="50">
+          <af:link id="l3" icon="/images/deleteicon_enabled.gif" action="goDelete"
+                   disabled="#{row.WorkflowStatus eq 'APPROVED' or row.WorkflowStatus eq 'INPROCESS'}"/>
+        </af:column>
+        <af:column id="c5" headerText="Report" align="center" width="50">
+          <af:link id="l4" icon="/images/printLogo.gif"
+                   actionListener="#{CallReport.callDSSReports('DSS_VCR', (row.bindings.VcrHdrIdPk.inputValue))}"/>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:panelGroupLayout>
+</ui:composition>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FromUserVO"
+  Version="12.2.1.0.31"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="pqt.dss.vcr.model.vo.FromUserVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[/*SELECT distinct d.MGR_N_AGENT_NO, su.user_id_pk      
+  FROM vu_dss_vcr_agent_detail d, dss_sm_users su, dss_sm_users mu   
+  where d.N_AGENT_NO = su.emp_id_fk   
+  and d.MGR_N_AGENT_NO = mu.emp_id_fk*/ 
+SELECT DISTINCT V.MGR_AGENT_CODE MGR_N_AGENT_NO, V.MGR_USER_ID user_id_pk 
+  FROM WF_AGENT_HIERARCHY_VIEW V]]></SQLQuery>
+  <ViewAttribute
+    Name="MgrNAgentNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="MGR_N_AGENT_NO"
+    Expression="MGR_N_AGENT_NO"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="UserIdPk"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="USER_ID_PK"
+    Expression="USER_ID_PK"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="pqt.dss.vcr.model.VcrModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

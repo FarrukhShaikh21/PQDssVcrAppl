@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31"
+                id="vcr_task_flow_definition_vcr_task_flow_definition_DeleteCommitPageDef" Package="flows.vcr"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="DeleteCommit" RequiresUpdateModel="true" Action="invokeMethod" MethodName="DeleteCommit"
+                  IsViewObjectMethod="false" DataControl="VcrAMDataControl"
+                  InstanceName="data.VcrAMDataControl.dataProvider"/>
+  </bindings>
+</pageDefinition>

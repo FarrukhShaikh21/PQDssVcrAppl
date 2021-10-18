@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.0.31" id="DataBindings"
+             SeparateXMLFiles="false" Package="pqt.dss.vcr.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/WEB-INF/flows/vcr/vcr-task-flow-definition.xml#vcr-task-flow-definition@CreateInsert"
+          usageId="pqt_dss_vcr_view_vcr_task_flow_definition_vcr_task_flow_definition_CreateInsertPageDef"/>
+    <page path="/WEB-INF/flows/vcr/vcr-task-flow-definition.xml#vcr-task-flow-definition@Rollback"
+          usageId="pqt_dss_vcr_view_vcr_task_flow_definition_vcr_task_flow_definition_RollbackPageDef"/>
+    <page path="/fragments/vcr/vcrQuery.jsff" usageId="pqt_dss_vcr_view_vcrQueryPageDef"/>
+    <page path="/fragments/vcr/vcrCreateUpdate.jsff" usageId="pqt_dss_vcr_view_vcrCreateUpdatePageDef"/>
+    <page path="/fragments/vcr/vcrDetail.jsff" usageId="pqt_dss_vcr_view_vcrDetailPageDef"/>
+    <page path="/page/VcrPage.jsf" usageId="pqt_dss_vcr_view_VcrPagePageDef"/>
+    <page path="/fragments/vcr/vcrNotification.jsff" usageId="pqt_dss_vcr_view_vcrNotificationPageDef"/>
+    <page path="/WEB-INF/flows/vcr/vcr-notification-task-flow-definition.xml#vcr-notification-task-flow-definition@setNVC_wfDocumentId"
+          usageId="pqt_dss_vcr_view_vcr_notification_task_flow_definition_vcr_notification_task_flow_definition_setNVC_wfDocumentIdPageDef"/>
+    <page path="/page/vcrNotification.jsf" usageId="pqt_dss_vcr_view_vcrNotificationPageDef1"/>
+    <page path="/WEB-INF/flows/vcr/vcr-task-flow-definition.xml#vcr-task-flow-definition@Delete"
+          usageId="pqt_dss_vcr_view_vcr_task_flow_definition_vcr_task_flow_definition_DeletePageDef"/>
+    <page path="/WEB-INF/flows/vcr/vcr-task-flow-definition.xml#vcr-task-flow-definition@DeleteCommit"
+          usageId="pqt_dss_vcr_view_vcr_task_flow_definition_vcr_task_flow_definition_DeleteCommitPageDef"/>
+    <page path="/WEB-INF/flows/vcr/vcr-task-flow-definition.xml#vcr-task-flow-definition@vcrSearchUser"
+          usageId="pqt_dss_vcr_view_vcr_task_flow_definition_vcr_task_flow_definition_vcrSearchUserPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="pqt_dss_vcr_view_vcr_task_flow_definition_vcr_task_flow_definition_CreateInsertPageDef"
+          path="flows.vcr.vcr_task_flow_definition_vcr_task_flow_definition_CreateInsertPageDef"/>
+    <page id="pqt_dss_vcr_view_vcr_task_flow_definition_vcr_task_flow_definition_RollbackPageDef"
+          path="flows.vcr.vcr_task_flow_definition_vcr_task_flow_definition_RollbackPageDef"/>
+    <page id="pqt_dss_vcr_view_vcrQueryPageDef" path="fragments.vcr.vcrQueryPageDef"/>
+    <page id="pqt_dss_vcr_view_vcrCreateUpdatePageDef" path="fragments.vcr.vcrCreateUpdatePageDef"/>
+    <page id="pqt_dss_vcr_view_vcrDetailPageDef" path="fragments.vcr.vcrDetailPageDef"/>
+    <page id="pqt_dss_vcr_view_VcrPagePageDef" path="page.VcrPagePageDef"/>
+    <page id="pqt_dss_vcr_view_vcrNotificationPageDef" path="fragments.vcr.vcrNotificationPageDef"/>
+    <page id="pqt_dss_vcr_view_vcr_notification_task_flow_definition_vcr_notification_task_flow_definition_setNVC_wfDocumentIdPageDef"
+          path="flows.vcr.vcr_notification_task_flow_definition_vcr_notification_task_flow_definition_setNVC_wfDocumentIdPageDef"/>
+    <page id="pqt_dss_vcr_view_vcrNotificationPageDef1" path="page.vcrNotificationPageDef"/>
+    <page id="pqt_dss_vcr_view_vcr_task_flow_definition_vcr_task_flow_definition_DeletePageDef"
+          path="flows.vcr.vcr_task_flow_definition_vcr_task_flow_definition_DeletePageDef"/>
+    <page id="pqt_dss_vcr_view_vcr_task_flow_definition_vcr_task_flow_definition_DeleteCommitPageDef"
+          path="flows.vcr.vcr_task_flow_definition_vcr_task_flow_definition_DeleteCommitPageDef"/>
+    <page id="pqt_dss_vcr_view_vcr_task_flow_definition_vcr_task_flow_definition_vcrSearchUserPageDef"
+          path="flows.vcr.vcr_task_flow_definition_vcr_task_flow_definition_vcrSearchUserPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="VcrAMDataControl" Package="pqt.dss.vcr.model.am"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="VcrAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

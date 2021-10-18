@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.0.31" id="vcrCreateUpdatePageDef"
+                Package="fragments.vcr">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DssVisitingCardReqView1" RangeSize="25" DataControl="VcrAMDataControl"
+              id="DssVisitingCardReqView1Iterator" ChangeEventPolicy="none"/>
+    <iterator Binds="DssVisitingCardReqHdrView1" RangeSize="25" DataControl="VcrAMDataControl"
+              id="DssVisitingCardReqHdrView1Iterator" ChangeEventPolicy="none"/>
+  </executables>
+  <bindings>
+    <methodAction id="Apply" RequiresUpdateModel="true" Action="invokeMethod" MethodName="Apply"
+                  IsViewObjectMethod="false" DataControl="VcrAMDataControl"
+                  InstanceName="data.VcrAMDataControl.dataProvider"/>
+    <tree IterBinding="DssVisitingCardReqView1Iterator" id="DssVisitingCardReqView1">
+      <nodeDefinition DefName="pqt.dss.vcr.model.vo.DssVisitingCardReqView" Name="DssVisitingCardReqView10">
+        <AttrNames>
+          <Item Value="AgentCode"/>
+          <Item Value="AgentName"/>
+          <Item Value="Designation"/>
+          <Item Value="ReportingManagerCode"/>
+          <Item Value="ReportingManagerName"/>
+          <Item Value="MobileNo"/>
+          <Item Value="Qualification"/>
+          <Item Value="OfficialEmailAdd"/>
+          <Item Value="AgentMobileNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="DssVisitingCardReqView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="DssVisitingCardReqView1Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <listOfValues IterBinding="DssVisitingCardReqHdrView1Iterator" StaticList="false" Uses="LOV_BranchName"
+                  id="BranchName1"/>
+    <attributeValues IterBinding="DssVisitingCardReqHdrView1Iterator" id="Address">
+      <AttrNames>
+        <Item Value="Address"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DssVisitingCardReqHdrView1Iterator" id="BranchCode">
+      <AttrNames>
+        <Item Value="BranchCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DssVisitingCardReqHdrView1Iterator" id="BranchCodeFk">
+      <AttrNames>
+        <Item Value="BranchCodeFk"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DssVisitingCardReqHdrView1Iterator" id="VcrDocNo">
+      <AttrNames>
+        <Item Value="VcrDocNo"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="searchAgent" RequiresUpdateModel="true" Action="invokeMethod" MethodName="searchAgent"
+                  IsViewObjectMethod="false" DataControl="VcrAMDataControl"
+                  InstanceName="data.VcrAMDataControl.dataProvider"
+                  ReturnName="data.VcrAMDataControl.methodResults.searchAgent_VcrAMDataControl_dataProvider_searchAgent_result"/>
+    <listOfValues Uses="LOV_AgentCode" StaticList="false" IterBinding="DssVisitingCardReqView1Iterator" id="AgentCode"/>
+  </bindings>
+</pageDefinition>
