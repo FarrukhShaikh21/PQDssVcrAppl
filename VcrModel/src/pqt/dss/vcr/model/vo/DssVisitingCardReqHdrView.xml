@@ -4,7 +4,7 @@
 <ViewObject
   xmlns="http://xmlns.oracle.com/bc4j"
   Name="DssVisitingCardReqHdrView"
-  Version="12.2.1.0.31"
+  Version="12.2.1.11.57"
   InheritPersonalization="merge"
   BindingStyle="OracleName"
   CustomQuery="true"
@@ -43,6 +43,10 @@
       </PIMap>
     </ParameterMap>
   </ViewAccessor>
+  <ViewAccessor
+    Name="AccLocationLov"
+    ViewObjectName="pqt.dss.vcr.model.lov.LocationLov"
+    RowLevelBinds="true"/>
   <ListBinding
     Name="LOV_BranchName"
     ListVOName="BranchDetailLovVo1"
@@ -68,26 +72,46 @@
     <DisplayCriteria
       Name="BranchDetailLovVoCriteria"/>
   </ListBinding>
-  <SQLQuery><![CDATA[SELECT DssVisitingCardReqHdr.VCR_HDR_ID_PK,      
-       DssVisitingCardReqHdr.ADDRESS,      
-       DssVisitingCardReqHdr.BRANCH_CODE_FK,      
-       DssVisitingCardReqHdr.BRANCH_NOTIF_ID_FK,      
-       DssVisitingCardReqHdr.BRANCH_STATUS,      
-       DssVisitingCardReqHdr.DSS_NOTIF_ID_FK,      
-       DssVisitingCardReqHdr.DSS_STATUS,      
-       DssVisitingCardReqHdr.ENTER_DATE,      
-       DssVisitingCardReqHdr.LAST_UPDATED_BY,      
-       DssVisitingCardReqHdr.LAST_UPDATED_DATE,      
-       DssVisitingCardReqHdr.USER_ID_FK,    
-       DssVisitingCardReqHdr.Vcr_Doc_No,  
-       DssVisitingCardReqHdr.Workflow_Status, 
-       DssVisitingCardReqHdr.Workflow_Notification_Id,  
-        (select b.V_BRANCH_NAME                   
-          from VU_DSS_ST_BRANCH b                   
-         where b.V_BRANCH_CODE = DssVisitingCardReqHdr.Branch_Code_Fk) "Branch Name",              
-         (select b.V_BRANCH_CODE                  
-          from VU_DSS_ST_BRANCH b                   
-         where b.V_BRANCH_CODE = DssVisitingCardReqHdr.Branch_Code_Fk) "Branch Code"    
+  <ListBinding
+    Name="LOV_GisLocationIdFk"
+    ListVOName="AccLocationLov"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="GisLocationIdFk"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="IlLocIdPk"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Location"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT DssVisitingCardReqHdr.VCR_HDR_ID_PK,       
+       DssVisitingCardReqHdr.ADDRESS,       
+       DssVisitingCardReqHdr.BRANCH_CODE_FK,       
+       DssVisitingCardReqHdr.BRANCH_NOTIF_ID_FK,       
+       DssVisitingCardReqHdr.BRANCH_STATUS,       
+       DssVisitingCardReqHdr.DSS_NOTIF_ID_FK,       
+       DssVisitingCardReqHdr.DSS_STATUS,       
+       DssVisitingCardReqHdr.ENTER_DATE,       
+       DssVisitingCardReqHdr.LAST_UPDATED_BY,       
+       DssVisitingCardReqHdr.LAST_UPDATED_DATE,       
+       DssVisitingCardReqHdr.USER_ID_FK,     
+       DssVisitingCardReqHdr.Vcr_Doc_No,   
+       DssVisitingCardReqHdr.Workflow_Status,  
+       DssVisitingCardReqHdr.Workflow_Notification_Id,   
+       DssVisitingCardReqHdr.Gis_Location_Id_Fk, 
+        (select b.V_BRANCH_NAME                    
+          from VU_DSS_ST_BRANCH b                    
+         where b.V_BRANCH_CODE = DssVisitingCardReqHdr.Branch_Code_Fk) "Branch Name",               
+         (select b.V_BRANCH_CODE                   
+          from VU_DSS_ST_BRANCH b                    
+         where b.V_BRANCH_CODE = DssVisitingCardReqHdr.Branch_Code_Fk) "Branch Code"     
 FROM  DSS_VISITING_CARD_REQ_HDR DssVisitingCardReqHdr]]></SQLQuery>
   <EntityUsage
     Name="DssVisitingCardReqHdr"
@@ -223,6 +247,20 @@ FROM  DSS_VISITING_CARD_REQ_HDR DssVisitingCardReqHdr]]></SQLQuery>
     EntityAttrName="WorkflowNotificationId"
     EntityUsage="DssVisitingCardReqHdr"
     AliasName="WORKFLOW_NOTIFICATION_ID"/>
+  <ViewAttribute
+    Name="GisLocationIdFk"
+    PrecisionRule="true"
+    EntityAttrName="GisLocationIdFk"
+    EntityUsage="DssVisitingCardReqHdr"
+    AliasName="GIS_LOCATION_ID_FK"
+    LOVName="LOV_GisLocationIdFk">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
   <ViewAttribute
     Name="BranchName"
     IsPersistent="false"
